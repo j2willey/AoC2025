@@ -1,7 +1,6 @@
 import os
 
 def load_data(data_file_path):
-    # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
     data_file_path = os.path.join(script_dir, data_file_path)
 
@@ -29,9 +28,23 @@ def day01Part1(filename = "input.txt"):
             zero_count += 1
     return zero_count, "zero crossings"
 
+def day01Part2(filename = "input.txt"):
+    global __day7Part2
+    turns = load_data(filename)
+    zero_count = 0
+    location = 50
+    for dir, steps in turns:
+        if dir == 'L':
+            location = steps - location + 100
+        else:  # dir == 'R'
+            location += steps
+        zero_count += location // 100
+        location = (location % 100)
+    return zero_count, "zero crossings"
+
 if __name__ == "__main__":
-    # 48, 37
-    part1, desc1 = day01Part1("input.txt")
-    # part2, desc2 = day01Part2()
+    filename = "input.txt"
+    part1, desc1 = day01Part1(filename)
+    part2, desc2 = day01Part2(filename)
     print(f"part 1   {part1} : {desc1} ")
-    # print(f"part 2  {desc2}:  {part2}")
+    print(f"part 2   {part2} : {desc2} ")

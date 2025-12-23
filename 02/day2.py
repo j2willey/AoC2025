@@ -45,12 +45,44 @@ def day02Part1(filename = "input.txt"):
     return invalid_idsum, "invalid IDs sum"
 
 def day02Part2(filename = "input.txt"):
-    # fallback: reuse part1 computation if needed
-    return day02Part1(filename)
+    global __day2Part2
+    ranges = load_data(filename)
+
+    # collect invalid ids in a set so overlapping ranges don't double-count
+    invalid_ids = set()
+
+    for start, end in ranges:
+        istart = int(start)
+        iend = int(end)
+        startlen = len(start)
+        endlen = len(end)
+        # if startlen % 2 == 1:
+        #     startlen += 1
+        if startlen > endlen:
+            continue
+        for length in range(startlen, endlen + 1):
+            for p in (2,3,4,5,6,7,8,9,10,11,13,17,19):
+                if p > 2 and length // p < 1:
+                    break
+                if length % p != 0:
+                    continue
+
+                parts = product('0123456789', repeat = length // p)
+                for part in parts:
+                    if part[0] == '0':
+                        continue
+                    fullstr = ''.join(part * p)
+                    fullid = int(fullstr)
+                    if fullid >= istart and fullid <= iend:
+                        # print(f"  id {fullstr}", end=' ')
+                        invalid_ids.add(fullid)
+
+    invalid_idsum = sum(invalid_ids)
+    return invalid_idsum, "invalid IDs sum"
 
 if __name__ == "__main__":
     filename = "input.txt"
     part1, desc1 = day02Part1(filename)
-    # part2, desc2 = day02Part2(filename)
+    part2, desc2 = day02Part2(filename)
     print(f"part 1   {part1} : {desc1} ")
-    # print(f"part 2   {part2} : {desc2} ")
+    print(f"part 2   {part2} : {desc2} ")

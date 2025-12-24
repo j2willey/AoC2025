@@ -9,8 +9,6 @@ def load_data(data_file_path):
         room = []
         for line in f:
             room.append( [ c == '@' for c in line.strip() ])
-        # print(room)
-
     return room
 
 def isPaperNeighbor(room, i, j):
@@ -32,29 +30,43 @@ def isLiftable(room, i, j):
         isPaperNeighbor(room, i+1, j),
         isPaperNeighbor(room, i+1, j+1) ])
 
-def day04Part1(filename = "input.txt"):
-    room = load_data(filename)
+def clear1pass(room):
     movables = 0
+    clearedroom = [row[:] for row in room]
+
     moved = [ [" " for _ in range(len(room[0])) ] for _ in range(len(room)) ]
     for i in range(len(room)):
         for j in range(len(room[0])):
             if room[i][j]:
                 nieghbors = isLiftable(room, i, j)
                 movables +=  int( nieghbors < 4)
+                clearedroom[i][j] = False if nieghbors < 4 else True
                 moved[i][j] = str(nieghbors)
             else:
                 moved[i][j] = "."
 
-    # for rowr, rowm in zip(room, moved):
-    #     print("".join( ['@' if i else '.' for i in rowr] ), end=' ')
-    #     print("  ", "".join( [str(i) for i in rowm] ))
+    return movables, clearedroom
+
+def day04Part1(filename = "input.txt"):
+    room = load_data(filename)
+    movables, room = clear1pass(room)
+    return movables, "number of liftable paper rolls"
+
+def day04Part2(filename = "input.txt"):
+    room = load_data(filename)
+    moved =1
+    movables = 0
+    while moved > 0:
+        moved, room = clear1pass(room)
+        movables += moved
 
     return movables, "number of liftable paper rolls"
+
 
 if __name__ == "__main__":
     filename = "input.txt"
     # filename = "test.txt"
     part1, desc1 = day04Part1(filename)
-    # part2, desc2 = day04Part2(filename)
+    part2, desc2 = day04Part2(filename)
     print(f"part 1   {part1} : {desc1} ")
-    # print(f"part 2   {part2} : {desc2} ")
+    print(f"part 2   {part2} : {desc2} ")

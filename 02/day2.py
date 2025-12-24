@@ -1,5 +1,4 @@
 import os
-import itertools
 from itertools import product
 
 def load_data(data_file_path):

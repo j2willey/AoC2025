@@ -53,8 +53,14 @@ def day05Part1(filename = "input.txt"):
     return fresh_count, "number of fresh ingredients"
 
 def day05Part2(filename = "input.txt"):
+    ranges, ids = load_data(filename)
+    condensed_ranges = condense_ranges(ranges)
+    total_fresh = 0
+    for range_start, range_end in condensed_ranges:
+        range_size = range_end - range_start + 1
+        total_fresh += range_size
 
-    return "foo", "number of fresh ingredients"
+    return total_fresh, "number of fresh ingredients"
 
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ def load_data(data_file_path):
             rows.append(line.strip())
     return rows
 
-def day7Part1(filename = "input.txt"):
+def day07Part1(filename = "input.txt"):
     global __day7Part1
     rows = load_data("input.txt")
     count = 0
@@ -34,7 +34,7 @@ def day7Part1(filename = "input.txt"):
     #    print(row)
     return count, "splits"
 
-def day7Part2(filename = "input.txt"):
+def day07Part2(filename = "input.txt"):
     global __day7Part1
     rows = load_data("input.txt")
     for i, row in enumerate(rows):
@@ -55,8 +55,8 @@ def day7Part2(filename = "input.txt"):
 
 
 if __name__ == "__main__":
-    part1, desc1 = day7Part1()
-    part2, desc2 = day7Part2()
+    part1, desc1 = day07Part1()
+    part2, desc2 = day07Part2()
     print(f"part 1  {desc1}:  {part1}")
     print(f"part 2  {desc2}:  {part2}")
 

@@ -54,7 +54,7 @@ class UnionFindRank:
 
 
 CONNECTED_PAIRS = 1000
-def day8Part1(filename = "input.txt"):
+def day08Part1(filename = "input.txt"):
     global __day8Part1
     points = load_data(filename)
 
@@ -75,7 +75,7 @@ def day8Part1(filename = "input.txt"):
         sizes.append(0)
     product_of_top3 = sizes[0] * sizes[1] * sizes[2]
 
-    print(f"product of top 3: {product_of_top3}")
+    # print(f"product of top 3: {product_of_top3}")
 
     return product_of_top3, "product of 3 largest circuit sizes"
 
@@ -83,7 +83,7 @@ class UnionFindRankPart2:
     def __init__(self, n):
         self.parent = list(range(n))
         self.sets = n
-        print(f"UnionFindRankPart2 initialized with {n} sets.")
+        # print(f"UnionFindRankPart2 initialized with {n} sets.")
     def find(self, x):
         if self.parent[x] != x:
             self.parent[x] = self.find(self.parent[x])
@@ -102,7 +102,7 @@ class UnionFindRankPart2:
 
 
 
-def day8Part2(filename = "input.txt"):
+def day08Part2(filename = "input.txt"):
     global __day8Part2
     points = load_data(filename)
     distances = get_all_sorted_distances_for_neighbor_pairs(points)
@@ -119,8 +119,8 @@ def day8Part2(filename = "input.txt"):
 
 
 if __name__ == "__main__":
-    part1, desc1 = day8Part1()
-    part2, desc2 = day8Part2()
+    part1, desc1 = day08Part1()
+    part2, desc2 = day08Part2()
     print(f"part 1    {part1} : {desc1}")
     print(f"part 2    {part2} : {desc2}")
 

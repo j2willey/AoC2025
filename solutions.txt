@@ -15,4 +15,10 @@
 8 1 121770
 8 2 7893123992
 9 1 4759531084
-9 2
+9 2 Not_Solved_Yet
+10 1 Not_Solved_Yet
+10 2 Not_Solved_Yet
+11 1 Not_Solved_Yet
+11 2 Not_Solved_Yet
+12 1 Not_Solved_Yet
+12 2 Not_Solved_Yet

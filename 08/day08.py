@@ -1,6 +1,5 @@
 import os
 import math
-import time
 
 def load_data(data_file_path):
     # Get the directory of the current script

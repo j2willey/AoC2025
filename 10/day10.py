@@ -66,12 +66,42 @@ def day10Part1(filename = "input.txt"):
 
     # Sum of found minimal presses (ignore unreachable machines)
     total_presses = sum(x for x in totals if x is not None)
-    return total_presses, "total minimal presses"
+    return total_presses, "total minimal presses for lights"
 
 
 def day10Part2(filename = "input.txt"):
+    machines = load_data(filename)
+    # For each machine, find minimal button presses to reach ltbyte from 0.
+    def min_presses_bfs(target, buttons, nbits):
+        # BFS over light states (0..(1<<nbits)-1), edges toggle by button masks.
+        if target == 0:
+            return 0
+        if not buttons:
+            return None
+        q = deque()
+        q.append((0, 0))
+        seen = {0}
+        while q:
+            state, dist = q.popleft()
+            for b in buttons:
+                nxt = state ^ b
+                if nxt == target:
+                    return dist + 1
+                if nxt not in seen:
+                    seen.add(nxt)
+                    q.append((nxt, dist + 1))
+        return None
 
-    return "bar", "Part 2 result"
+    totals = []
+    for idx, (ltdiag, ltbyte, buttons, joltage) in enumerate(machines, start=1):
+        nbits = len(ltdiag)
+        best = min_presses_bfs(ltbyte, buttons, nbits)
+        totals.append(best)
+        # print(f"Machine {idx}: target=0b{ltbyte:0{nbits}b}, buttons={len(buttons)}, min_presses={best}")
+
+    # Sum of found minimal presses (ignore unreachable machines)
+    total_presses = sum(x for x in totals if x is not None)
+    return total_presses, "total minimal presses for joltage"
 
 
 if __name__ == "__main__":

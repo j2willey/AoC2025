@@ -41,16 +41,16 @@ def run_challenge(day, part, expected_solutions, details=False):
         duration = end_time - start_time
         expected_value = expected_solutions.get((day, part))
         if str(result) == str(expected_value):
-            print(f"Day {day} Part {part}: PASS", end="")
+            print(f"Day {day:2} Part {part}: PASS", end="")
         else:
-            print(f"Day {day} Part {part}: FAIL (Expected: [{expected_value}], Got: [{result}])", end="")
+            print(f"Day {day:2} Part {part}: FAIL (Expected: [{expected_value}], Got: [{result}])", end="")
         if details:
             print(f" {description} {result}", end="")
         print(f" ({duration:.6f} seconds)")
     except (ImportError, AttributeError) as e:
-        print(f"Day {day} Part {part}: ERROR ({e})")
+        print(f"Day {day:2} Part {part}: ERROR ({e})")
     except (FileNotFoundError) as e:
-        print(f"Day {day} Part {part}: ERROR ({e}) Not implemented yet.")
+        print(f"Day {day:2} Part {part}: ERROR ({e}) Not implemented yet.")
 
 def main():
     parser = argparse.ArgumentParser(description="Run AoC challenges and compare results with expected values.")
@@ -62,7 +62,7 @@ def main():
 
     expected_solutions = load_expected_solutions("solutions.txt")
 
-    days = args.days if args.days else range(1, 12)
+    days = args.days if args.days else range(1, 13)
     parts = args.parts if args.parts else [1, 2]
     details = args.details
 

@@ -18,7 +18,7 @@
 9 2 Not_Solved_Yet
 10 1 500
 10 2 Not_Solved_Yet
-11 1 Not_Solved_Yet
+11 1 523
 11 2 Not_Solved_Yet
 12 1 Not_Solved_Yet
 12 2 Not_Solved_Yet
